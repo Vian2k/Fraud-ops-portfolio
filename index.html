@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hemera | Fraud & Risk Operations Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #070b12;
+      --bg-alt: #0f1724;
+      --card: #111827;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.15);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2933;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.7);
+      --radius-xl: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 24px 16px 60px;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #0b1120;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.8);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    nav a {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: 0.18s ease;
+    }
+
+    nav a:hover {
+      border-color: var(--accent-soft);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--accent);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .page {
+        padding-inline: 18px;
+      }
+    }
+
+    .hero-main {
+      padding: 20px 20px 22px;
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 55%),
+                  rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-title {
+      font-size: 26px;
+      font-weight: 700;
+      margin-top: 12px;
+      margin-bottom: 8px;
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .hero-sub strong {
+      color: var(--text);
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .btn {
+      font-size: 13px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.18s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      color: #0b1120;
+      font-weight: 600;
+      box-shadow: 0 14px 30px rgba(56, 189, 248, 0.5);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(56, 189, 248, 0.7);
+    }
+
+    .btn-ghost {
+      border-color: rgba(148, 163, 184, 0.5);
+      color: var(--muted);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .hero-side {
+      padding: 18px;
+      border-radius: var(--radius-xl);
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .contact-list {
+      list-style: none;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .contact-list li + li {
+      margin-top: 6px;
+    }
+
+    .contact-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #64748b;
+      margin-bottom: 2px;
+    }
+
+    .section {
+      margin-bottom: 28px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+      gap: 12px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .section-kicker {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.6fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .card-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(30, 64, 175, 0.7);
+      padding: 16px 16px 14px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.8);
+    }
+
+    .card-muted {
+      border-color: rgba(51, 65, 85, 0.9);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .card-meta {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    .pill-small {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      font-size: 10px;
+      color: #9ca3af;
+    }
+
+    .list {
+      font-size: 13px;
+      color: var(--muted);
+      margin-left: 14px;
+    }
+
+    .list li {
+      margin-bottom: 5px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .chip {
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: #9ca3af;
+    }
+
+    footer {
+      margin-top: 36px;
+      font-size: 11px;
+      color: var(--muted);
+      border-top: 1px solid rgba(30, 64, 175, 0.7);
+      padding-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div class="avatar">H</div>
+        <div>
+          <div class="pill">
+            <span class="pill-dot"></span>
+            <span>Fraud & Risk Operations</span>
+          </div>
+          <div style="font-size:13px;margin-top:4px;color:#e5e7eb">
+            Hemera — Fraud / Dispute / KYC
+          </div>
+        </div>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#cases">Case Studies</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero" id="about">
+        <div class="hero-main">
+          <div class="pill">
+            <span class="pill-dot"></span>
+            <span>Portfolio — Fraud Operations Analyst</span>
+          </div>
+          <h1 class="hero-title">
+            Fraud & Dispute Operations for High-Risk, CNP & Gaming-Style Flows
+          </h1>
+          <p class="hero-sub">
+            I’m a <strong>Fraud & Risk Operations Analyst</strong> with hands-on experience in
+            transaction monitoring, chargebacks, KYC/AML, and suspicious activity review —
+            especially in <strong>high-risk, card-not-present</strong> environments. I enjoy
+            turning messy payment data and user behavior into clear risk decisions.
+          </p>
+
+          <div class="hero-tags">
+            <span class="tag">Chargebacks (Visa 13.1 / 4853)</span>
+            <span class="tag">CNP Fraud</span>
+            <span class="tag">DFS / Gaming-adjacent flows</span>
+            <span class="tag">KYC / AML</span>
+            <span class="tag">PSP Ops (Airwallex, PayArc, etc.)</span>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#cases" class="btn btn-primary">
+              View fraud case studies →
+            </a>
+            <a href="#experience" class="btn btn-ghost">
+              Experience overview
+            </a>
+          </div>
+        </div>
+
+        <aside class="hero-side" id="contact">
+          <div>
+            <div class="contact-label">Location</div>
+            <div>Vietnam · Open to remote / relocation</div>
+          </div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div><a href="mailto:vietanhvhk@gmail.com">vietanhvhk@gmail.com</a></div>
+          </div>
+          <div>
+            <div class="contact-label">Portfolio URL (for applications)</div>
+            <div>https://hemera-fraud-ops-portfolio.example</div>
+            <!-- khi deploy thật, bạn đổi example thành domain thật -->
+          </div>
+          <div>
+            <div class="contact-label">Focus</div>
+            <div>Fraud Ops · Payments Risk · Chargebacks · KYC/AML</div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- EXPERIENCE SNAPSHOT -->
+      <section class="section" id="experience">
+        <div class="section-header">
+          <h2 class="section-title">Experience Snapshot</h2>
+          <div class="section-kicker">Recent work</div>
+        </div>
+
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Fraud & Dispute Operations Analyst</div>
+                <div class="card-meta">GBG Group · 2025 – Present · Remote</div>
+              </div>
+              <span class="pill-small">High-risk CNP · Multi-PSP</span>
+            </div>
+            <ul class="list">
+              <li>
+                Monitor daily transactions across multiple PSPs to detect
+                <strong>suspicious deposits, withdrawal risks, VPN usage, IP/device mismatches, and potential multi-account activity</strong>.
+              </li>
+              <li>
+                Investigate chargeback cases (Visa 13.1, 4853, fraud claims) and
+                build full representment packages using fulfillment logs, device/IP
+                intelligence, CRM transcripts, and authentication evidence.
+              </li>
+              <li>
+                Own the <strong>full dispute lifecycle</strong> with acquirers, PSPs, and customers:
+                representment → pre-arbitration → arbitration.
+              </li>
+              <li>
+                Conduct <strong>KYC/AML checks</strong> (ID, address, payment method ownership)
+                and review account behavior to prevent identity theft and unauthorized use.
+              </li>
+            </ul>
+            <div class="chips">
+              <span class="chip">Fraud Monitoring</span>
+              <span class="chip">Chargebacks</span>
+              <span class="chip">DFS-style risk patterns</span>
+            </div>
+          </article>
+
+          <article class="card card-muted">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Ops & Verification · Mapletree & Oliver Suites</div>
+                <div class="card-meta">2020 – 2024 · Ho Chi Minh City</div>
+              </div>
+              <span class="pill-small">KYC · Ops · Data Integrity</span>
+            </div>
+            <ul class="list">
+              <li>
+                Performed <strong>document and identity verification</strong> (passports, IDs,
+                employment letters, income / credit documents, financial histories) —
+                directly transferable to KYC/AML and user verification workflows.
+              </li>
+              <li>
+                Managed <strong>access control data</strong> (lift cards, parking IDs, visitor logs)
+                and daily registrations, ensuring accurate records and behavior monitoring.
+              </li>
+              <li>
+                Maintained 100% accuracy in contracts, renewals, invoices, and operational
+                records across financial and regulatory data.
+              </li>
+              <li>
+                Handled tenant inquiries and complaints via email/phone, mirroring
+                coordination with <strong>Customer Support</strong> on ID issues, suspicious
+                behavior, and account access problems.
+              </li>
+            </ul>
+            <div class="chips">
+              <span class="chip">KYC Ops</span>
+              <span class="chip">Data & Access Control</span>
+              <span class="chip">Customer Issue Resolution</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- CASE STUDIES -->
+      <section class="section" id="cases">
+        <div class="section-header">
+          <h2 class="section-title">Selected Fraud & Dispute Case Studies</h2>
+          <div class="section-kicker">How I work</div>
+        </div>
+
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">1. Suspicious Player Behavior & Multi-Account Risk</div>
+                <div class="card-meta">Transaction Monitoring · Behavior Analysis</div>
+              </div>
+            </div>
+            <ul class="list">
+              <li>
+                Reviewed sequences of deposits, failed attempts, device changes, and IP
+                geolocation to flag potential <strong>multi-account / bonus abuse-style behavior</strong>.
+              </li>
+              <li>
+                Combined MaxMind-style risk scores with velocity checks and
+                BIN/IP country mismatch to identify high-risk clusters.
+              </li>
+              <li>
+                Documented findings in a structured case note format so that product,
+                fraud, and support teams could all understand the risk decision.
+              </li>
+              <li>
+                Outcome: reduced exposure from repeated risky attempts and informed
+                new rule settings for similar patterns in the future.
+              </li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">2. Chargeback Lifecycle Ownership (Visa 13.1 / 4853)</div>
+                <div class="card-meta">Dispute Ops · Evidence Strategy</div>
+              </div>
+            </div>
+            <ul class="list">
+              <li>
+                Handled end-to-end disputes: evidence gathering, narrative writing,
+                issuer Q&A, and escalation decisions (representment → pre-arb → arb).
+              </li>
+              <li>
+                Used <strong>fulfillment data, user communication, device/IP logs,
+                and payment history</strong> to counter “service not provided” and cardholder
+                dispute claims.
+              </li>
+              <li>
+                Built templates and SOPs for repeatable, high-quality case files,
+                improving consistency and win-rate across PSPs.
+              </li>
+              <li>
+                Outcome: strong representment performance and better alignment
+                between fraud, ops, and support in how disputes are handled.
+              </li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="card" style="margin-top:16px;">
+          <div class="card-header">
+            <div>
+              <div class="card-title">3. KYC / AML & Account Integrity</div>
+              <div class="card-meta">Identity · Documentation · Compliance</div>
+            </div>
+          </div>
+          <ul class="list">
+            <li>
+              Reviewed identity documents, proof of income, and financial histories
+              to confirm user legitimacy and detect inconsistencies.
+            </li>
+            <li>
+              Cross-checked profile data with behavior (access logs, communication trail,
+              payment patterns) to protect account integrity.
+            </li>
+            <li>
+              Escalated edge cases with clear reasoning and recommendations, helping
+              stakeholders make confident risk decisions quickly.
+            </li>
+          </ul>
+          <div class="chips">
+            <span class="chip">KYC / AML</span>
+            <span class="chip">Account Integrity</span>
+            <span class="chip">Risk Escalations</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section class="section" id="skills">
+        <div class="section-header">
+          <h2 class="section-title">Tools & Skills</h2>
+          <div class="section-kicker">What I bring</div>
+        </div>
+
+        <div class="card-grid">
+          <div class="card card-muted">
+            <div class="card-title" style="margin-bottom:6px;">Fraud & Risk</div>
+            <ul class="list">
+              <li>Transaction monitoring · CNP & high-risk payments</li>
+              <li>Chargebacks: Visa 13.1, 4853, fraud disputes</li>
+              <li>Rule design: IP/device, BIN/IP mismatch, velocity</li>
+              <li>DFS / gaming-adjacent payment and behavior patterns</li>
+            </ul>
+          </div>
+          <div class="card card-muted">
+            <div class="card-title" style="margin-bottom:6px;">Ops, Data & Collaboration</div>
+            <ul class="list">
+              <li>KYC/AML verification & documentation review</li>
+              <li>Operational reporting and trend insights</li>
+              <li>Cross-functional work with Support, Ops, and PSPs</li>
+              <li>High attention to detail, fast learning, and ownership</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>© <span id="year"></span> Hemera — Fraud & Risk Operations Portfolio</div>
+      <div>Available for Fraud Ops / Risk / Disputes roles.</div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
